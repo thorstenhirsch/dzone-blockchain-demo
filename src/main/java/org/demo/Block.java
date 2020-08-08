@@ -25,8 +25,8 @@ public class Block {
         this.hash = Arrays.hashCode(IntStream.of(data.hashCode(), this.previousHash).toArray());
     }
 
-    public String println() {
-        return String.format("Block data: %s, hash: %s, previous: %s.%n",
+    public String toString() {
+        return String.format("Block data: %s, hash: %s, previous: %s.",
                 this.data, this.hash, this.previousHash);
     }
 }
