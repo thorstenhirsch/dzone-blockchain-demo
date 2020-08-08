@@ -2,12 +2,18 @@ package org.demo;
 
 import lombok.Getter;
 import lombok.ToString;
+
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.stream.IntStream;
 
 @Getter
 @ToString
-public class Block {
+public class Block implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     private String data;
     private Block previousBlock; // pointer
@@ -28,5 +34,16 @@ public class Block {
     public String toString() {
         return String.format("Block data: %s, hash: %s, previous: %s.",
                 this.data, this.hash, this.previousHash);
+    }
+
+    public void writeToFile(String filename) {
+        try {
+            FileOutputStream fileOut = new FileOutputStream(filename);
+            ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
+            objectOut.writeObject(this);
+            objectOut.close();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 }

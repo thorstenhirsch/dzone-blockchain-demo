@@ -1,5 +1,7 @@
 package org.demo;
 
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
 import java.util.stream.Stream;
 
 public class BlockChain {
@@ -32,6 +34,9 @@ public class BlockChain {
         System.out.println("---------------------");
         System.out.println("Is valid?: " + validate(dZoneBlock));
         System.out.println("---------------------");
+
+        dZoneBlock.writeToFile("dzoneblock.dat");
+        System.out.printf("Block %s was succesfully written to file %s.%n", dZoneBlock.getData(), "dzoneblock.dat");
     }
 
     private static boolean validate(Block latestBlock) {
